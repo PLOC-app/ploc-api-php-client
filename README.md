@@ -1,5 +1,4 @@
 ﻿# ploc-api-php-client
-PLOC APIs Client Library for PHP
 
 🇫🇷 Installation et paramétrage 🇫🇷
 
@@ -20,6 +19,12 @@ La méthode getFollowLink() prend en paramètre un identifiant. Par exemple la r
 ```
 $client = new PLOC();
 echo "<center><button type=button onclick=\"document.location.href='".$client->getFollowLink("Your Customer Reference")."';\">Lier mon compte PLOC</button></center>";
+
+// Lorsque la demande de liaison est faite à partir de PLOC, les informations du PLOC💙 sont stockées dans l'URL.
+// Dans ce cas le PLOC💙 est automatiquement redirigé.
+if($client->containsUserCredentials()) {
+    echo "<script>document.location.href='".$client->getFollowLink("Your Customer Reference")."';</script>";
+}
 ```
 
 > Le PLOC💙 est redirigé sur les serveurs PLOC ou il entre ses identifiants PLOC. Puis il est redirigé vers votre page de retour.
@@ -64,7 +69,7 @@ $text = "Bonjour,\nVoici la liste des fiches vins achetées.\nÀ bientôt.";
 $purchaseDate = "2020-05-25";
 $vendor = array(
 	"title" => "PLOC",
-	"contact" => "Matthiue Ducrocq",
+	"contact" => "Matthieu Ducrocq",
 	"address1" => "2 Ter rue de la Batterie",
 	"postalCode" => "62000",
 	"city" => "Arras",
