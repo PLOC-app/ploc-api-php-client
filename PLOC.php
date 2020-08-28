@@ -174,7 +174,7 @@ class PLOC
 			return '';
 		}
 		echo("<script language=javascript>\n");
-		echo("document.location = 'ploc://?action=inbox&status=success';\n");
+		echo("document.location = 'ploc://app?action=inbox&status=success';\n");
 		echo("</script>\n");
 	}
 
