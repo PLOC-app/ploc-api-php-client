@@ -1,7 +1,7 @@
 ﻿# ploc-api-php-client
 PLOC APIs Client Library for PHP
 
-🇫🇷 Installation et paramétrage de l'API 🇫🇷
+🇫🇷 Installation et paramétrage 🇫🇷
 
 L'intégration se déroule en 3 étapes : 
 
@@ -15,16 +15,18 @@ Ce lien pointe vers nos serveurs, le client s’identifiera avec ses accès PLOC
 
 
 
-** Étape 1 : Ajouter le bouton de liaison dans l'espace client **
+# Étape 1 : Ajouter le bouton de liaison dans l'espace client
 La méthode getFollowLink() prend en paramètre un identifiant. Par exemple la référence client ou le md5 de l'adresse email.
 ```
 $client = new PLOC();
 echo "<center><button type=button onclick=\"document.location.href='".$client->getFollowLink("Your Customer Reference")."';\">Lier mon compte PLOC</button></center>";
 ```
 
-> Le PLOC💙 est redirigé sur les serveurs PLOC ou il entre ses identifiants PLOC. Puis il est redirigé vers la page de retour.
+> Le PLOC💙 est redirigé sur les serveurs PLOC ou il entre ses identifiants PLOC. Puis il est redirigé vers votre page de retour.
 
-** Étape 2 : Réceptionner et stocker le jeton PLOC dans votre système **
+
+
+# Étape 2 : Réceptionner et stocker le jeton PLOC dans votre système
 
 ```
 $client = new PLOC();
@@ -44,7 +46,9 @@ $client->redirectToPloc();
 
 ```
 
-** Étape 3 : Envoyer le contenu de la commande **
+
+
+# Étape 3 : Envoyer le contenu de la commande
 > L'envoi de la notification se fait généralement à l'expédition de la commande.
 
 ```
@@ -137,5 +141,4 @@ if(!$status) {
     }
 }
 echo "<center>Message " .($status == true ? "" : "non")." envoyé</center>";
-
 ```
