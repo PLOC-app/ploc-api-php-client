@@ -27,7 +27,8 @@ if($client->containsUserCredentials()) {
 }
 ```
 
-> Le PLOC💙 est redirigé sur les serveurs PLOC ou il entre ses identifiants PLOC. Puis il est redirigé vers votre page de retour.
+> Le PLOC💙 est redirigé sur les serveurs PLOC ou il entre ses identifiants PLOC.
+> Puis il est redirigé vers votre page de retour.
 
 
 
@@ -147,11 +148,10 @@ if(!$status) {
 echo "<center>Message " .($status == true ? "" : "non")." envoyé</center>";
 ```
 
-#Documentation des propriétés du message
+# Documentation des propriétés du message
+> Les propriétés (*) sont obligatoires.
 
 ```
-Les propriétés (*) sont obligatoires.
-
 vendor : informations sur le vendeur, sera repris dans la fiche achat du vin.
     title       : nom du vendeur (*)
     contact     : nom du contact
