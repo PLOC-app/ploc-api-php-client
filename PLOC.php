@@ -39,22 +39,22 @@ class PLOC
  
 	/**
 	 * @var string
-     */
+	 */
 	var $PUBLIC_KEY;
 
 	/**
 	 * @var string
-     */
+	 */
 	var $PRIVATE_KEY;
 
 	/**
 	 * @var string
-     */
+	 */
 	var $HMAC_KEY;
 
 	/**
 	 * @var bool
-     */
+	 */
 	var $VERBOSE = FALSE;
 
 	function __construct() {
@@ -76,7 +76,7 @@ class PLOC
 		if($this->isNullOrEmpty($this->HMAC_KEY)) {
 			throw new Exception('HMAC_KEY must be set', 3);
 		}
-    }
+	}
 	
 	/**
 	 * Return a secure link to bind your reference to a PLOC account.
@@ -101,8 +101,8 @@ class PLOC
 	 * @param string $app
 	 * @param string $appToken
 	 * @param string $plocToken
-     * @param string $timestamp
-     * @param string $remoteSignature
+	 * @param string $timestamp
+	 * @param string $remoteSignature
 	 * 
 	 * @return bool
 	 */ 
@@ -137,6 +137,15 @@ class PLOC
 	}
 
 	/**
+	 * Return if the incoming request contains user credentials
+	 *
+	 * @return bool
+	 */ 
+	function containsUserCredentials() {
+		return $this->getQueryValue("ploc_data") != '';
+	}
+
+	/**
 	 * Return the validity of a link using current URI
 	 *
 	 * @return bool
@@ -160,7 +169,7 @@ class PLOC
 			return '';
 		}
 		echo("<script language=javascript>\n");
-		echo("document.location = 'ploc://?action=inbox';\n");
+		echo("document.location = 'ploc://?action=inbox&status=success';\n");
 		echo("</script>\n");
 	}
 
@@ -483,7 +492,7 @@ class PLOC
 			$authorization,
 		);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
 		curl_setopt($curl, CURLOPT_VERBOSE, true);
 
 		if($method != self::METHOD_GET) {
