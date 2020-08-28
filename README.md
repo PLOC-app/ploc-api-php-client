@@ -47,8 +47,7 @@ $appToken = $client->getCurrentAppToken(); // Contient la référence client pas
 
 // On renvoie le PLOC💙 vers l'application
 $client->redirectToPloc();
-> Cette méthode ne fait rien si la liaison a été initié à partir de l'espace client du site Internet.
-
+// Cette méthode ne fait rien si la liaison a été initié à partir de l'espace client du site Internet.
 ```
 
 
@@ -146,4 +145,74 @@ if(!$status) {
     }
 }
 echo "<center>Message " .($status == true ? "" : "non")." envoyé</center>";
+```
+
+#Documentation des propriétés du message
+
+```
+Les propriétés (*) sont obligatoires.
+
+vendor : informations sur le vendeur, sera repris dans la fiche achat du vin.
+    title       : nom du vendeur (*)
+    contact     : nom du contact
+    address1    : ligne d'adresse 1
+    address2    : ligne d'adresse 2
+    postalCode  : Code postal
+    city        : ville
+    phoneNumber : numéro de téléphone (format 03 03 03 03 03)
+	email       : email du contact
+	website     : site internet
+
+product :
+    sku         : votre référence du produit
+    vintage     : millésime de la fiche
+    title       : nom du vin (*)
+    color       : type de vin (*) valeurs possibles -> red, rosy, white, sparkling, sweet, other
+                : valeurs possibles 
+                    red         : vin rouge
+                    rosy        : vin rosé
+                    white       : vin blanc
+                    sparkling   : effervescent (Champagne & Champagne Rosé, Crémant...)
+                    sweet       : vin liquoreux ou doux (Sauternes, Maury)
+                    other       : tous les vins n'entrant pas dans une de ces catégories
+    country     : pays
+    region      : région viticole (le pays est obligatoire si la région est renseignée)
+    appellation : L'AOC ou l'IGP du vin (la région est obligatoire si l'appellation est renseignée)
+    classification : classement (Cru Bourgeois, 2ème Cru Classé, 1er Cru...)
+    imageUrl    : Lien pour télécharger l'image
+    productUrl  : Lien vers la fiche produit
+    meals       : Ensemble de plats ou de catégorie (PLOC fera automatiquement la conversion)
+                  Exemples :
+                    Charcuterie, Viande rouge, Gibier, Champignon, Barbecue, Fromage
+                    Très bel accord avec l'agneau, de manière générale avec les viandes rouges et le fromage.
+                    Apprécié sur des entrées variées, des poissons grillés et des viandes blanches, notamment la volaille.
+    grapes      : Assemblage du vin, séparer les cépages par des ","
+                   Merlot, Cabernet Franc, Cabernet Sauvignon
+                   50% Chardonnay, 50% Pinot Meunier
+                   Pour un vin mono cépage ne pas écrire 100% mais juste le nom du cépage :
+                    Chardonnay par exemple.
+    volume      : volume de la bouteille en litre (0.75, 1.5)
+    service     : température de service en degré
+    degree      : degrée d'alcool de la fiche
+    unitPrice   : prix unitaire TTC de la bouteille
+    quantity    : quantité achetée
+    apogee      : voir apogee
+    owner       : voir owner
+    
+apogee : période d'apogée
+     from   : année de début
+     to     : année de fin
+
+owner : informations sur le château ou le domaine, sera repris dans la fiche du vin.
+    title           : nom du château ou du domaine (*)
+    contact         : nom du contact
+    address1        : ligne d'adresse 1
+    address2        : ligne d'adresse 2
+    postalCode      : Code postal
+    city            : ville
+    country         : France
+    countryIsoCode  : FR
+    phoneNumber     : numéro de téléphone (format 03 03 03 03 03)
+	email           : email du contact
+	website         : site internet
 ```
