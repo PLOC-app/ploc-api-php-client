@@ -17,7 +17,12 @@ class PLOC
 	const METHOD_GET = 'GET';
 	const METHOD_PUT = 'PUT';
 	const METHOD_DELETE = 'DELETE';
+
 	const STATUS_CODE_SUCCESS = 200;
+	const STATUS_CODE_BAD_REQUEST = 400;
+	const STATUS_CODE_FORBIDDEN = 403;
+	const STATUS_CODE_NOT_FOUND = 404;
+
 	const DEFAULT_PAGE_SIZE = 10;
 
 	const STATUS_SUCCESS = 'success';
@@ -39,22 +44,22 @@ class PLOC
  
 	/**
 	 * @var string
-     */
+	 */
 	var $PUBLIC_KEY;
 
 	/**
 	 * @var string
-     */
+	 */
 	var $PRIVATE_KEY;
 
 	/**
 	 * @var string
-     */
+	 */
 	var $HMAC_KEY;
 
 	/**
 	 * @var bool
-     */
+	 */
 	var $VERBOSE = FALSE;
 
 	function __construct() {
@@ -76,7 +81,7 @@ class PLOC
 		if($this->isNullOrEmpty($this->HMAC_KEY)) {
 			throw new Exception('HMAC_KEY must be set', 3);
 		}
-    }
+	}
 	
 	/**
 	 * Return a secure link to bind your reference to a PLOC account.
@@ -101,8 +106,8 @@ class PLOC
 	 * @param string $app
 	 * @param string $appToken
 	 * @param string $plocToken
-     * @param string $timestamp
-     * @param string $remoteSignature
+	 * @param string $timestamp
+	 * @param string $remoteSignature
 	 * 
 	 * @return bool
 	 */ 
@@ -137,6 +142,15 @@ class PLOC
 	}
 
 	/**
+	 * Return if the incoming request contains user credentials
+	 *
+	 * @return bool
+	 */ 
+	function containsUserCredentials() {
+		return $this->getQueryValue("ploc_data") != '';
+	}
+
+	/**
 	 * Return the validity of a link using current URI
 	 *
 	 * @return bool
@@ -160,7 +174,7 @@ class PLOC
 			return '';
 		}
 		echo("<script language=javascript>\n");
-		echo("document.location = 'ploc://?action=inbox';\n");
+		echo("document.location = 'ploc://app?action=inbox&status=success';\n");
 		echo("</script>\n");
 	}
 
@@ -483,7 +497,7 @@ class PLOC
 			$authorization,
 		);
 		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
+		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method);
 		curl_setopt($curl, CURLOPT_VERBOSE, true);
 
 		if($method != self::METHOD_GET) {
@@ -502,7 +516,10 @@ class PLOC
 			echo "response : <pre>" .$response."</pre><br><br>"; 
 		}
 
-		if($httpCode == self::STATUS_CODE_SUCCESS) {
+		if(($httpCode == self::STATUS_CODE_SUCCESS)
+			| ($httpCode == self::STATUS_CODE_BAD_REQUEST) 
+			| ($httpCode == self::STATUS_CODE_FORBIDDEN)
+			| ($httpCode == self::STATUS_CODE_NOT_FOUND)) {
 			return ($data);
 		}
 		return NULL;
