@@ -17,7 +17,12 @@ class PLOC
 	const METHOD_GET = 'GET';
 	const METHOD_PUT = 'PUT';
 	const METHOD_DELETE = 'DELETE';
+
 	const STATUS_CODE_SUCCESS = 200;
+	const STATUS_CODE_BAD_REQUEST = 400;
+	const STATUS_CODE_FORBIDDEN = 403;
+	const STATUS_CODE_NOT_FOUND = 404;
+
 	const DEFAULT_PAGE_SIZE = 10;
 
 	const STATUS_SUCCESS = 'success';
@@ -511,7 +516,10 @@ class PLOC
 			echo "response : <pre>" .$response."</pre><br><br>"; 
 		}
 
-		if($httpCode == self::STATUS_CODE_SUCCESS) {
+		if(($httpCode == self::STATUS_CODE_SUCCESS)
+			| ($httpCode == self::STATUS_CODE_BAD_REQUEST) 
+			| ($httpCode == self::STATUS_CODE_FORBIDDEN)
+			| ($httpCode == self::STATUS_CODE_NOT_FOUND)) {
 			return ($data);
 		}
 		return NULL;
