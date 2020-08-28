@@ -148,7 +148,7 @@ if(!$status) {
 echo "<center>Message " .($status == true ? "" : "non")." envoyé</center>";
 ```
 
-# Documentation des propriétés du message
+# Documentation
 > Les propriétés (*) sont obligatoires.
 
 ```
@@ -160,8 +160,8 @@ vendor : informations sur le vendeur, sera repris dans la fiche achat du vin.
     postalCode  : Code postal
     city        : ville
     phoneNumber : numéro de téléphone (format 03 03 03 03 03)
-	email       : email du contact
-	website     : site internet
+    email       : email du contact
+    website     : site internet
 
 product :
     sku         : votre référence du produit
@@ -213,6 +213,6 @@ owner : informations sur le château ou le domaine, sera repris dans la fiche du
     country         : France
     countryIsoCode  : FR
     phoneNumber     : numéro de téléphone (format 03 03 03 03 03)
-	email           : email du contact
-	website         : site internet
+    email           : email du contact
+    website         : site internet
 ```
