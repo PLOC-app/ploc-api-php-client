@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include 'PLOC-Config.php';
 
 /**
@@ -97,6 +97,10 @@ class PLOC
 		$signature = $this->PUBLIC_KEY."".$appToken."".$timestamp;
 		$signature = $this->getSignature($signature);
 		$plocData = $this->getQueryValue("ploc_data");
+		if((isset($_SESSION['ploc_data']))
+			&& ($_SESSION['ploc_data'] != '')) {
+			$plocData = $_SESSION['ploc_data'];
+		}
 		return "https://app.PLOC.pro/Follow?App=".$this->PUBLIC_KEY."&appToken=".rawurlencode($appToken)."&timestamp=".$timestamp."&signature=".rawurlencode($signature)."&data=".rawurlencode($plocData);
 	}
 
@@ -147,6 +151,10 @@ class PLOC
 	 * @return bool
 	 */ 
 	function containsUserCredentials() {
+		if((isset($_SESSION['ploc_data']))
+			&& ($_SESSION['ploc_data'] != '')) {
+			return true;	
+		}
 		return $this->getQueryValue("ploc_data") != '';
 	}
 
